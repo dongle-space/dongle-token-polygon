@@ -25,3 +25,5 @@ contract("NotionToken", (accounts) =>  {
     })
 
 })
+
+// contract ("Canon",  )  
