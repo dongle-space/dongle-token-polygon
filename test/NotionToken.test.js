@@ -1,4 +1,4 @@
-let NotionToken = artifacts.require("NotionToken");
+let NotionToken = artifacts.require("NotionToken"); // artifacts are an object provided by truffle to interact with the contract
 
 contract("NotionToken", (accounts) =>  {
     // console.log(accounts)

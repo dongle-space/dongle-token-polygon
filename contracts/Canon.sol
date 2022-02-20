@@ -12,6 +12,7 @@ contract Canon is ERC1155, Ownable {
     string public message;
     // address owner;
 
+    //   Constructor code is only run when the contract is created
     constructor(string memory _message) ERC1155("") { //ERC1155는 어떤 uri를 받는다. 
         _mint(msg.sender, BOOBS, 10**5, ""); //_mint function은 발행을 하는 것 같다. msg.sender는 아마도 초기 소유자인 것 같다.  정확하지 않다. 
         _mint(msg.sender, BTS, 10**3, ""); //The mint function sends an amount of newly created coins to another address.

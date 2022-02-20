@@ -46,7 +46,35 @@ module.exports = {
     // You should run a client (like ganache-cli, geth or parity) in a separate terminal
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
-    //
+    development: {
+      host: "127.0.0.1",
+      port: "7545",
+      network_id: "*" // match any network id
+    },
+    // eth: {
+    //   provider: () => new HDWalletProvider(
+    //     privateKeys,
+    //     'ETH_NODE_URL'
+    //   ),
+    //   network_id: 1,
+    //   skipDryRun: true
+    // },
+    // bsc: {
+    //   provider: () => new HDWalletProvider(
+    //     privateKeys,
+    //     'https://bsc-dataseed.binance.org/'
+    //   ),
+    //   network_id: 56,
+    //   skipDryRun: true
+    // },
+    // bscTestnet: {
+    //   provider: () => new HDWalletProvider(
+    //     privateKeys,
+    //     'http://data-seed-prebsc-1-s1.binance.org:8545'
+    //   ),
+    //   network_id: 97,
+    //   skipDryRun: true
+    // },
     // development: {
     //  host: "127.0.0.1",     // Localhost (default: none)
     //  port: 8545,            // Standard Ethereum port (default: none)
@@ -91,11 +119,7 @@ module.exports = {
     // network_id: 2111,   // This network is yours, in the cloud.
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
-    development: {
-      host: "127.0.0.1",
-      port: "7545",
-      network_id: "*" // match any network id
-    }
+
   },
 
   // Set default mocha options here, use special reporters etc.
