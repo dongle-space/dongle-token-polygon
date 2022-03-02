@@ -1,4 +1,3 @@
-const HDWalletProvider = require("@truffle/hdwallet-provider")
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -19,14 +18,13 @@ const HDWalletProvider = require("@truffle/hdwallet-provider")
  *
  */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
-//
-// const fs = require('fs');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
+const privateKey = fs.readFileSync(".secret").toString().trim()
 
 const private_keys= [
-  '6a86338267f568fa40e7df5b26627df9d5d74b60f7a32076709de69917d48dd2',
-  '6f73cabe856159be5000de15f275b96ff0b8f745bd592382259e37019dfbc5d6'
+  privateKey
 ]
 
 module.exports = {
@@ -50,6 +48,23 @@ module.exports = {
       host: "127.0.0.1",
       port: "7545",
       network_id: "*" // match any network id
+    },
+    polygon_main: {
+      provider: () => new HDWalletProvider(private_keys, `https://polygon-rpc.com/`),
+      network_id: 137,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+      
+      gas: 6000000,
+      gasPrice: 10000000000,
+    },
+    polygon_test: {
+      provider: () => new HDWalletProvider(private_keys, `https://rpc-mumbai.maticvigil.com`),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
     },
     // eth: {
     //   provider: () => new HDWalletProvider(
@@ -91,28 +106,28 @@ module.exports = {
     // },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
-    ropsten: {
-      provider: () => new HDWalletProvider({
-        privateKeys: private_keys,
-        providerOrUrl: "https://ropsten.infura.io/v3/496a1b6ff75f42e489857277ddca4a94",
-        numberOfAddresses: 2
-      }),
-      network_id: 3,       // Ropsten's id
-      gas: 5500000,        // Ropsten has a lower block limit than mainnet
-      confirmations: 2,    // # of confs to wait between deployments. (default: 0)
-      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
-      // provider: () => new HDWalletProvider({
-      //   privateKeys: private_keys,
-      //   providerOrURl: "https://ropsten.infura.io/v3/496a1b6ff75f42e489857277ddca4a94",
-      //   numberOfAddresses: 2
-      // }),
-      // network_id: 3,       // Ropsten's id
-      // gas: 5500000,        // Ropsten has a lower block limit than mainnet
-      // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
-      // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
-    },
+    // ropsten: {
+    //   provider: () => new HDWalletProvider({
+    //     privateKeys: private_keys,
+    //     providerOrUrl: "https://ropsten.infura.io/v3/496a1b6ff75f42e489857277ddca4a94",
+    //     numberOfAddresses: 2
+    //   }),
+    //   network_id: 3,       // Ropsten's id
+    //   gas: 5500000,        // Ropsten has a lower block limit than mainnet
+    //   confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+    //   timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+    //   skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    //   // provider: () => new HDWalletProvider({
+    //   //   privateKeys: private_keys,
+    //   //   providerOrURl: "https://ropsten.infura.io/v3/496a1b6ff75f42e489857277ddca4a94",
+    //   //   numberOfAddresses: 2
+    //   // }),
+    //   // network_id: 3,       // Ropsten's id
+    //   // gas: 5500000,        // Ropsten has a lower block limit than mainnet
+    //   // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+    //   // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+    //   // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    // },
     // Useful for private networks
     // private: {
     // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
@@ -132,13 +147,13 @@ module.exports = {
     solc: {
       version: "0.8.11",    // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      // settings: {          // See the solidity docs for advice about optimization and evmVersion
-      //  optimizer: {
-      //    enabled: false,
-      //    runs: 200
-      //  },
+      settings: {          // See the solidity docs for advice about optimization and evmVersion
+       optimizer: {
+         enabled: true,
+         runs: 200
+       },
       //  evmVersion: "byzantium"
-      // }
+      }
     }
   },
 

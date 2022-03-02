@@ -1,3 +1,3 @@
-# NotionToken-dev-Ropsten
+# Dongle Token
 
-This is a test for Notion token(NTN) based on ERC-20.
+This is a code for the Dongle Token contract based on ERC-20.
