@@ -1,8 +1,10 @@
-const { deployProxy } = require('@openzeppelin/truffle-upgrades');
+const { deployProxy } = require("@openzeppelin/truffle-upgrades");
 
-const Dongle = artifacts.require("./Dongle.sol");
+const DongleV1 = artifacts.require("./Dongle.sol");
 
 module.exports = async function (deployer) {
-  const instance = await deployProxy(Dongle, {deployer});
-  console.log('Deployed', instance.address);
+    // console.log(Dongle)
+  const instance = await deployProxy(DongleV1, [], {deployer, kind: "uups"});
+  console.log("Deployed", instance.address);
 };
+
