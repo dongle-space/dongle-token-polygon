@@ -1,20 +1,20 @@
 const {expect} = require("chai")
-const DongleV1 = artifacts.require("DongleV1")
+const Dongle = artifacts.require("Dongle")
 
 //start test block
-constract("DongleV1", (accounts)=> {
+constract("Dongle", (accounts)=> {
     beforeEach(async () => {
-        //Deploy a new DongleV1 contract for each test
-        this.DongleV1 = await DongleV1.new({
+        //Deploy a new Dongle contract for each test
+        this.Dongle = await Dongle.new({
             from: accounts[0],
         });
-        await this.DongleV1.initialize();
+        await this.Dongle.initialize();
     });
 
     it("should mint 1 NFT with tokenId 0", async () =>{
-        await this.DongleV1.mint(accounts[1], 0, 1);
+        await this.Dongle.mint(accounts[1], 0, 1);
         expect(
-            (await this.DongleV1.balanceOf(accounts[1], 0)).toString()
+            (await this.Dongle.balanceOf(accounts[1], 0)).toString()
         ).to.equal("1");
     })
 })
