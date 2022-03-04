@@ -1,4 +1,28 @@
-// let NotionToken = artifacts.require("NotionToken"); // artifacts are an object provided by truffle to interact with the contract
+const {expect} = require("chai")
+const DongleV1 = artifacts.require("DongleV1")
+
+//start test block
+constract("DongleV1", (accounts)=> {
+    beforeEach(async () => {
+        //Deploy a new DongleV1 contract for each test
+        this.DongleV1 = await DongleV1.new({
+            from: accounts[0],
+        });
+        await this.DongleV1.initialize();
+    });
+
+    it("should mint 1 NFT with tokenId 0", async () =>{
+        await this.DongleV1.mint(accounts[1], 0, 1);
+        expect(
+            (await this.DongleV1.balanceOf(accounts[1], 0)).toString()
+        ).to.equal("1");
+    })
+})
+
+
+
+// let NotionToken = artifacts.require("NotionToken");
+// // artifacts are an object provided by truffle to interact with the contract
 
 // contract("NotionToken", (accounts) =>  {
 //     // console.log(accounts)
@@ -8,7 +32,7 @@
 //         console.log("Notion accounts", NotionToken.accounts)
 //         console.log("Notion amount", NotionToken.amount)
 //     })
-
+// })
 //     it("gives the owner of the token 1M tokens", async () => {
 //         let balance = await NotionToken.balanceOf(accounts[0])
 //         balance = (web3.utils.fromWei(balance, 'ether'))
