@@ -74,14 +74,16 @@ module.exports = {
     //   network_id: 1,
     //   skipDryRun: true
     // },
-    // bsc: {
-    //   provider: () => new HDWalletProvider(
-    //     privateKeys,
-    //     'https://bsc-dataseed.binance.org/'
-    //   ),
-    //   network_id: 56,
-    //   skipDryRun: true
-    // },
+    bsc: {
+      provider: () => new HDWalletProvider(
+        private_keys,
+        'https://bsc-dataseed.binance.org/'
+      ),
+      network_id: 56,
+      confirmations: 10,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
     // bscTestnet: {
     //   provider: () => new HDWalletProvider(
     //     privateKeys,
