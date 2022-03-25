@@ -18,15 +18,13 @@
  *
  */
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const fs = require('fs');
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const fs = require("fs");
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 const privateKey = fs.readFileSync(".secret").toString().trim();
-require("dotenv").config()
+require("dotenv").config();
 
-const private_keys= [
-  privateKey
-]
+const private_keys = [privateKey];
 
 module.exports = {
   /**
@@ -48,10 +46,11 @@ module.exports = {
     development: {
       host: "127.0.0.1",
       port: "7545",
-      network_id: "*" // match any network id
+      network_id: "*", // match any network id
     },
     polygon_main: {
-      provider: () => new HDWalletProvider(private_keys, `https://polygon-rpc.com/`),
+      provider: () =>
+        new HDWalletProvider(private_keys, `https://polygon-rpc.com/`),
       network_id: 137,
       confirmations: 2,
       timeoutBlocks: 200,
@@ -60,11 +59,12 @@ module.exports = {
       gasPrice: 45000000000,
     },
     polygon_test: {
-      provider: () => new HDWalletProvider(private_keys, `https://rpc-mumbai.maticvigil.com`),
+      provider: () =>
+        new HDWalletProvider(private_keys, `https://rpc-mumbai.maticvigil.com`),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
-      skipDryRun: true
+      skipDryRun: true,
     },
     // eth: {
     //   provider: () => new HDWalletProvider(
@@ -75,23 +75,24 @@ module.exports = {
     //   skipDryRun: true
     // },
     bsc: {
-      provider: () => new HDWalletProvider(
-        private_keys,
-        'https://bsc-dataseed.binance.org/'
-      ),
+      provider: () =>
+        new HDWalletProvider(private_keys, "https://bsc-dataseed4.ninicoin.io/"),
       network_id: 56,
       confirmations: 10,
-      timeoutBlocks: 200,
-      skipDryRun: true
+      timeoutBlocks: 500,
+      gas: 12000000, // Gas sent with each transaction (default: ~6700000)
+      gasPrice: 12000000000, 
+      skipDryRun: true,
     },
-    // bscTestnet: {
-    //   provider: () => new HDWalletProvider(
-    //     privateKeys,
-    //     'http://data-seed-prebsc-1-s1.binance.org:8545'
-    //   ),
-    //   network_id: 97,
-    //   skipDryRun: true
-    // },
+    bscTestnet: {
+      provider: () =>
+        new HDWalletProvider(
+          private_keys,
+          "https://data-seed-prebsc-1-s1.binance.org:8545"
+        ),
+      network_id: 97,
+      skipDryRun: true,
+    },
     // development: {
     //  host: "127.0.0.1",     // Localhost (default: none)
     //  port: 8545,            // Standard Ethereum port (default: none)
@@ -136,7 +137,6 @@ module.exports = {
     // network_id: 2111,   // This network is yours, in the cloud.
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
-
   },
 
   // Set default mocha options here, use special reporters etc.
@@ -147,22 +147,21 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.12",    // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.12", // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      settings: {          // See the solidity docs for advice about optimization and evmVersion
-       optimizer: {
-         enabled: true,
-         runs: 200
-       },
-      //  evmVersion: "byzantium"
-      }
-    }
+      settings: {
+        // See the solidity docs for advice about optimization and evmVersion
+        optimizer: {
+          enabled: true,
+          runs: 200,
+        },
+        //  evmVersion: "byzantium"
+      },
+    },
   },
-  plugins: [
-    'truffle-plugin-verify'
-  ],
+  plugins: ["truffle-plugin-verify"],
   api_keys: {
-    polygonscan: process.env.POLYGONSCAN_API_KEY,
+    bscscan: process.env.BSCSCAN_API_KEY,
   },
   // Truffle DB is currently disabled by default; to enable it, change enabled:
   // false to enabled: true. The default storage location can also be
@@ -171,17 +170,17 @@ module.exports = {
   // NOTE: It is not possible to migrate your contracts to truffle DB and you should
   // make a backup of your artifacts to a safe location before enabling this feature.
   //
-  // After you backed up your artifacts you can utilize db by running migrate as follows: 
+  // After you backed up your artifacts you can utilize db by running migrate as follows:
   // $ truffle migrate --reset --compile-all
   //
   // db: {
-    // enabled: false,
-    // host: "127.0.0.1",
-    // adapter: {
-    //   name: "sqlite",
-    //   settings: {
-    //     directory: ".db"
-    //   }
-    // }
+  // enabled: false,
+  // host: "127.0.0.1",
+  // adapter: {
+  //   name: "sqlite",
+  //   settings: {
+  //     directory: ".db"
+  //   }
+  // }
   // }
 };
