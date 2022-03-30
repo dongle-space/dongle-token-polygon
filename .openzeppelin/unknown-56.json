@@ -11,7 +11,7 @@
     "34aac8cfc175fcedcb00ce9ce1e7e22deb815f944bb1ddd41d02149e84c5b700": {
       "address": "0x964e18eFc9d9CA1dB5e8c65E458cb33799C52623",
       "txHash": "0xe9797eeac190a0ef55e3ed4924af01e02968287e544176e23c82ab07500c4062",
-      "layout": {
+      "layout": { 
         "storage": [
           {
             "contract": "Initializable",
