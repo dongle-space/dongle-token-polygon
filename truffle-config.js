@@ -161,7 +161,7 @@ module.exports = {
   },
   plugins: ["truffle-plugin-verify"],
   api_keys: {
-    bscscan: process.env.BSCSCAN_API_KEY,
+    polygoncan: process.env.POLYGON_API_KEY,
   },
   // Truffle DB is currently disabled by default; to enable it, change enabled:
   // false to enabled: true. The default storage location can also be
